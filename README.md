@@ -207,7 +207,9 @@ As done in class, `n_feature` is set to 5 and `p` is set o 0.3. 30 epochs were u
 
 ![Base Model Training and Validation Curves](images/base_model_training.png)
 
-At the end of the training, an accuracy of 0.788 was obtained.
+### Evaluation
+
+At the end of the training, an accuracy of 0.7877 was obtained, precision was 0.7916, and recall was 0.7877. The model shows good performance in terms of both precision and recall, with the values being relatively close, indicating that the model is effectively balancing the ability to correctly identify positive instances (recall) with the ability to avoid incorrectly labeling negatives as positives (precision). Accuracy is also decent, showing that the model correctly predicts the majority of instances.
 
 The following confusion matrix was obtained:
 
@@ -229,4 +231,26 @@ Also, we can visualize the outputs of the intermediate layers using hooks, gener
 
 ![Base Model Feature Maps](images/base_model_featuremap.png)
 
+--- 
+
+## Other models
+
+With the goal of improving the model performance, we developed 5 variations of the base model and performed the training + evaluation pipeline that was previously presented. The other models are as follows:
+
+- Model 1: Base Model + `n_feature = 10`
+- Model 2: Base Model + `n_feature = 15`
+- Model 3: Base Model + `n_feature = 20`
+- Model 4: Base Model + 1 Extra Convolution+Pooling Block (`n_feature = 5`)
+- Model 5: Base Model + 2 Extra Convolution+Pooling Block (`n_feature = 5`)
+
+As presented for the base model, the confusion matrix, accuracy, precision, recall, filter and feature maps visualization were made for all the models. For the sake of organization, we decide to not present all these results in this README. However, they all can be seen and be reproduced with the `part1.ipynb` notebook. We summarized the results in the following table:
+
+| Model         | Trainable Parameters  | Accuracy  | Precision  | Recall    |
+|---------------|-----------------------|-----------|------------|-----------|
+| Base          | 6823                  | 0.7877    | 0.7916     | 0.7877    | 
+| 1             | 13893                 | 0.8553    | 0.8599     | 0.8553    | 
+| 2             | 21413                 | 0.8813    | 0.8814     | 0.8813    | 
+| 3             | 29383                 | 0.8843    | 0.8847     | 0.8843    | 
+| 4             | ~0.7                  | ~0.84259  | ~0.84259   | ~0.84259  | 
+| 5             | ~0.7                  | ~0.84259  | ~0.84259   | ~0.84259  | 
 
