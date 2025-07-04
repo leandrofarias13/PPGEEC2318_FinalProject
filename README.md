@@ -183,8 +183,6 @@ After the preprocessing, we define a function to visualize some sample images:
 ### Architecture
 The base model used in this project, which was presented in the PPGEEC2318 classes, employs two convolutional blocks, each consisting of a convolutional layer followed by a ReLU activation function and a max-pooling layer. Below are the key features of the architecture:
 
-![Base Model Architecture](images/base_model.png)
-
 1. **Convolutional Layers**:
    - **Conv1**: The first convolutional layer applies 3x3 filters to the input image, which has 3 channels (RGB), and outputs feature maps with `n_feature` channels. This layer is followed by the ReLU activation function, which introduces non-linearity into the model. After the activation, max-pooling with a 2x2 kernel is applied, reducing the spatial dimensions of the feature maps.
    - **Conv2**: The second convolutional layer takes the output from the first layer and applies 3x3 filters, again followed by ReLU and max-pooling with a 2x2 kernel. The number of feature maps is kept the same as the previous layer.
@@ -202,5 +200,33 @@ The base model used in this project, which was presented in the PPGEEC2318 class
 5. **Overall Structure**:
    - The network takes an image as input, applies two convolutional blocks to extract hierarchical features, and then uses fully connected layers to classify the image into one of the predefined classes. The final output is a vector of size 3, representing the predicted class probabilities for a 3-class classification problem.
 
+![Base Model Architecture](images/base_model.png)
+
 ### Training
-As done in class, `n_feature` is set to 5 and `p` is set o 0.3.
+As done in class, `n_feature` is set to 5 and `p` is set o 0.3. 30 epochs were used for the training, and the training and validation curves are shown below:
+
+![Base Model Training and Validation Curves](images/base_model_training.png)
+
+At the end of the training, an accuracy of 0.788 was obtained.
+
+The following confusion matrix was obtained:
+
+![Base Model Confusion Matrix](images/base_model_confusion_matrix.png)
+
+The model performance is acceptable, but with room for improvement. In the next section, we will change some model parameters and the model architecture with the goal to improve the model performance.
+
+### Visualizing Filters
+
+To better investigate the model behavior, we can visualize the filters of the convolutional layers of the model:
+
+![Base Model First Convolution Layer](images/base_model_filters_conv1.png)
+
+![Base Model Second Convolution Layer](images/base_model_filters_conv2.png)
+
+### Visualizing Feature Maps
+
+Also, we can visualize the outputs of the intermediate layers using hooks, generating the following feature map:
+
+![Base Model Feature Maps](images/base_model_featuremap.png)
+
+
