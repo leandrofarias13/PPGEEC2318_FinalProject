@@ -1,4 +1,4 @@
-# Multiclass Classification Problem with Subset of the CIFAR-10 Dataset
+# CNN Models for Multiclass Classification Problem with Subset of the CIFAR-10 Dataset
 
 In this notebook, we'll be analyzing a subset of the **CIFAR-10 dataset** to develop a convolutional neural network (CNN) with PyTorch, aiming to classify images into one of three object categories: **airplane**, **automobile**, or **ship**.
 
@@ -251,6 +251,84 @@ As presented for the base model, the confusion matrix, accuracy, precision, reca
 | 1             | 13893                 | 0.8553    | 0.8599     | 0.8553    | 
 | 2             | 21413                 | 0.8813    | 0.8814     | 0.8813    | 
 | 3             | 29383                 | 0.8843    | 0.8847     | 0.8843    | 
-| 4             | ~0.7                  | ~0.84259  | ~0.84259   | ~0.84259  | 
-| 5             | ~0.7                  | ~0.84259  | ~0.84259   | ~0.84259  | 
+| 4             | 8356                  | 0.6993    | 0.7192     | 0.6993    | 
+| 5             | 10676                 | 0.8000    | 0.8004     | 0.8000    | 
 
+For the first 3 models, for which the `n_feature` parameters varies, model 2 presents the best trade-off between trainable parameters and performance metrics, since model 3 presents a considerable increase in parameters for an improvement of only 0.0030 in accuracy. Between models 4 a 5, for which the architecture changes in relation to the base, model 5 presents a considerable increase in accuracy when adding two Convolution+Pooling blocks, instead of just one, which justifies the increase in trainable parameters.
+
+## Final Model
+
+For the final model, we decided to combine models 2 and 5, that is, a model with `n_feature=15` and 2 additional Convolution+Pooling blocks. The training and evaluation of the final model is presented in the next subsections.
+
+### Training
+The training and validation curves are shown below:
+
+![Final Model Training and Validation Curves](images/final_model_training.png)
+
+### Evaluation
+
+At the end of the training, an accuracy of 0.8950 was obtained, precision was 0.8948, and recall was 0.0.8950. Accuracy showed a significant improvement when compared to the performance of the base model.
+
+The following confusion matrix was obtained:
+
+![Final Model Confusion Matrix](images/final_model_confusion_matrix.png)
+
+### Visualizing Filters
+
+To better investigate the model behavior, we can visualize the filters of the convolutional layers of the model:
+
+![Final Model First Convolution Layer](images/final_model_filters_conv1.png)
+
+![Final Model Second Convolution Layer](images/final_model_filters_conv2.png)
+
+![Final Model First Convolution Layer](images/final_model_filters_conv3.png)
+
+![Final Model Second Convolution Layer](images/final_model_filters_conv4.png)
+
+### Visualizing Feature Maps
+
+Also, we can visualize the outputs of the intermediate layers using hooks, generating the following feature map:
+
+![Final Model Feature Maps](images/final_model_featuremap.png)
+
+## **Conclusions**
+
+In this project, we successfully applied a convolutional neural network (CNN) to classify a subset of the **CIFAR-10** dataset into three categories: **airplane**, **automobile**, and **ship**. The process included data preprocessing, model development, and evaluation. 
+
+Through a series of model variations, we identified that the base CNN model performed well, achieving a solid balance between **precision** and **recall**. The **accuracy** of the base model was 0.7877, while the precision and recall were both around 0.7916 and 0.7877, respectively. However, after experimenting with various architectures, we achieved significant improvements. The **final model**, which combines the best aspects of both feature adjustments and architectural changes, yielded an accuracy of 0.8950, with corresponding precision and recall of 0.8948 and 0.8950. 
+
+These results highlight the importance of exploring different configurations and hyperparameters to achieve optimal model performance. Notably, the model that added two extra convolutional blocks showed substantial improvements in accuracy and robustness.
+
+While the model performs well on this simplified subset of the **CIFAR-10 dataset**, there is always room for further optimization, such as exploring more advanced architectures, hyperparameter tuning, or testing on larger datasets. This project provides a solid foundation for understanding and applying CNNs in the context of image classification.
+
+### **Key Takeaways**:
+- The **Base Model** offered a solid starting point, with good precision and recall values.
+- Adjusting the **n_feature** parameter and adding **extra convolutional blocks** improved the model’s performance significantly.
+- The **final model** (with `n_feature = 15` and two extra convolution blocks) provided the best trade-off between performance and computational complexity.
+
+This work offers valuable insights into building and improving image classification models with PyTorch and can serve as a reference for further developments in machine learning applications.
+
+
+## Intended Use
+
+- **Educational**: Demonstrate multiclass classification model with CNN using PyTorch.
+- **Not intended**: For production or real financial/customer decision-making systems.
+
+---
+
+## Ethical Considerations
+
+- Dataset is synthetic: No real user data involved.
+
+---
+
+## How to Cite
+
+```bibtex
+@misc{customerpurchase2025,
+  author = {Farias, Leandro and Lopes, Nicholas},
+  title = {CNN Models for Multiclass Classification Problem with Subset of the CIFAR-10 Dataset},
+  year = {2025},
+  note = {Graduate project, UFRN - PPGEEC2318}
+}
+```
