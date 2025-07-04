@@ -174,11 +174,33 @@ val_loader   = DataLoader(val_data, batch_size=16, shuffle=False)
 
 After the preprocessing, we define a function to visualize some sample images:
 
-![Example of Preprocessed Images](images/preprocessing.png)
+![Example of Preprocessed Images](images/preprocessing_example.png)
 
 ---
 
 ## Base CNN Model
 
+### Architecture
+The base model used in this project, which was presented in the PPGEEC2318 classes, employs two convolutional blocks, each consisting of a convolutional layer followed by a ReLU activation function and a max-pooling layer. Below are the key features of the architecture:
 
+![Base Model Architecture](images/base_model.png)
 
+1. **Convolutional Layers**:
+   - **Conv1**: The first convolutional layer applies 3x3 filters to the input image, which has 3 channels (RGB), and outputs feature maps with `n_feature` channels. This layer is followed by the ReLU activation function, which introduces non-linearity into the model. After the activation, max-pooling with a 2x2 kernel is applied, reducing the spatial dimensions of the feature maps.
+   - **Conv2**: The second convolutional layer takes the output from the first layer and applies 3x3 filters, again followed by ReLU and max-pooling with a 2x2 kernel. The number of feature maps is kept the same as the previous layer.
+
+2. **Feature Extraction**:
+   - After the two convolutional blocks, the output feature maps are flattened to a one-dimensional vector, which is used as the input to the fully connected layers.
+
+3. **Fully Connected Layers**:
+   - **fc1**: The first fully connected layer consists of 50 units and receives the flattened feature vector from the convolutional layers. This layer is followed by the ReLU activation function. Dropout is applied here to prevent overfitting, with a probability `p` (if greater than 0).
+   - **fc2**: The second fully connected layer has 3 output units, corresponding to the number of classes in the classification task. This layer provides the final classification result.
+
+4. **Dropout**:
+   - Dropout layers are added after the fully connected layers with the specified dropout probability `p`. This helps prevent overfitting by randomly setting some of the weights to zero during training.
+
+5. **Overall Structure**:
+   - The network takes an image as input, applies two convolutional blocks to extract hierarchical features, and then uses fully connected layers to classify the image into one of the predefined classes. The final output is a vector of size 3, representing the predicted class probabilities for a 3-class classification problem.
+
+### Training
+As done in class, `n_feature` is set to 5 and `p` is set o 0.3.
