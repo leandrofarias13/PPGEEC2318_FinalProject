@@ -90,7 +90,7 @@ The full CIFAR-10 dataset is available at [CIFAR-10 - Kaggle Dataset](https://ww
 ```python
 with zipfile.ZipFile("cifar10_subset.zip", 'r') as zip_ref:
         zip_ref.extractall('')
-'''
+```
 
 For further referencing, the paths for the training and test sets is recorded as follows:
 
