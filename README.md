@@ -94,7 +94,7 @@ with zipfile.ZipFile("cifar10_subset.zip", 'r') as zip_ref:
 
 For further referencing, the paths for the training and test sets is recorded as follows:
 
-'''python
+```python
 path_train = 'cifar10_subset/train'
 print("Path to dataset files for training:", path_train)
 
