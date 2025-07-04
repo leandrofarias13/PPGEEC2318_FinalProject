@@ -101,3 +101,84 @@ print("Path to dataset files for training:", path_train)
 path_test = 'cifar10_subset/test'
 print("Path to dataset files for test:", path_test)
 ```
+
+The first images of the train set for each class are shown below as examples:
+
+![Dataset Examples](images/dataset_examples.png)
+
+---
+
+## Data Preprocessing
+
+The preprocessing starts by defining a pipeline using `torchvision.transforms` that performs the following operations:
+
+1. **Resize** all images to `28x28` pixels  
+2. **Convert** to a `PIL.Image` object to ensure consistency in channels  
+3. **Cast to float** and **normalize** pixel values from the `[0, 255]` range to `[0.0, 1.0]`  
+
+These transformations are composed using `Compose()` and applied to the dataset through `ImageFolder`, which automatically labels images based on subfolder names.
+
+```python
+temp_transform = Compose([
+    Resize(28),                      # Resize each image to 28x28
+    ToImage(),                       # Convert tensor back to PIL Image (RGB)
+    ToDType(torch.float32, scale=True)  # Convert to float32 and normalize pixel values to [0,1]
+])
+```
+
+The dataset is then loaded:
+
+```python
+temp_dataset = ImageFolder(
+    root=path_train,
+    transform=temp_transform  # Apply the preprocessing pipeline to every image
+)
+```
+
+Normalization improves training by ensuring that input values have zero mean and unit variance. To compute normalization values:
+
+```python
+temp_loader = DataLoader(temp_dataset, batch_size=16)
+first_images, first_labels = next(iter(temp_loader))
+Architecture.statistics_per_channel(first_images, first_labels)
+```
+
+We apply this across the entire dataset:
+
+```python
+results = Architecture.loader_apply(temp_loader, Architecture.statistics_per_channel)
+```
+
+This gives the sums of means and standard deviations, which can be used to compute averages:
+
+```python
+normalizer = Architecture.make_normalizer(temp_loader)
+```
+
+The dataset is split into training and validation sets using folder structure:
+
+```python
+composer = Compose([
+    Resize(28),
+    ToImage(),
+    ToDType(torch.float32, scale=True),
+    normalizer  # Apply normalization transform
+])
+
+train_data = ImageFolder(root=path_train, transform=composer)
+val_data   = ImageFolder(root=path_test, transform=composer)
+
+train_loader = DataLoader(train_data, batch_size=16, shuffle=True)
+val_loader   = DataLoader(val_data, batch_size=16, shuffle=False)
+```
+
+After the preprocessing, we define a function to visualize some sample images:
+
+![Example of Preprocessed Images](images/preprocessing.png)
+
+---
+
+## Base CNN Model
+
+
+
