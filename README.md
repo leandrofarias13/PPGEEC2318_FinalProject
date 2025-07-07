@@ -231,6 +231,16 @@ Also, we can visualize the outputs of the intermediate layers using hooks, gener
 
 ![Base Model Feature Maps](images/base_model_featuremap.png)
 
+This feature map shows the output of the first convolutional layer (`conv1`) applied to 10 input images using 5 different filters (`fil#0` to `fil#4`).
+
+- **Low-level feature extraction**: Filters capture basic visual patterns such as edges, textures, and shapes.
+- **Filter specialization**: 
+  - `fil#2` highlights object contours (e.g., aircraft edges).
+  - `fil#1` responds more to bright regions (e.g., sky or background).
+- **Preserved object structure**: Aircraft shapes remain recognizable, especially in high-contrast images.
+- **Activation strength varies**: Brighter areas = stronger activation; darker = weak or no response.
+- **Some filters less responsive**: `fil#4` produces weaker activations, possibly detecting subtle or redundant features.
+
 --- 
 
 ## Other models
