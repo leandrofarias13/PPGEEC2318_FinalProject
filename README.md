@@ -301,9 +301,9 @@ Also, we can visualize the outputs of the intermediate layers using hooks, gener
 
 ![Final Model Feature Maps](images/final_model_featuremap.png)
 
-The comparison between the two feature maps clearly illustrates the transition of the convolutional network from learning basic visual features to capturing more complex and abstract representations. In the first feature map, extracted from the `conv1` layer, the filters capture low-level features such as edges, contours, and simple textures. The activations are well-defined, and object shapes—such as aircraft—are still visible, indicating that the filters are focused on identifying fundamental structural patterns.
+These feature maps illustrate the transition of the convolutional network from learning basic visual features to capturing more complex and abstract representations. In the `conv1` layer, the filters capture low-level features such as edges, contours, and simple textures. The activations are well-defined, and object shapes—such as aircraft—are still visible, indicating that the filters are focused on identifying fundamental structural patterns.
 
-In contrast, the most recent feature map comes from a deeper layer in the network and displays a much larger number of filters with denser, less sharp activations that are harder to interpret visually. This behavior is expected in deeper layers, where filters learn to combine features extracted earlier to form higher-level semantic representations, such as specific parts of objects or discriminative patterns important for classification tasks.
+In contrast, the feature map that comes from a deeper layer in the network displays a much larger number of filters with denser, less sharp activations that are harder to interpret visually. This behavior is expected in deeper layers, where filters learn to combine features extracted earlier to form higher-level semantic representations, such as specific parts of objects or discriminative patterns important for classification tasks.
 
 In summary, while the early layers of the network act as general detectors of basic visual patterns, the deeper layers serve as specialists, extracting increasingly abstract and task-relevant information. This hierarchical learning process is one of the key strengths of deep convolutional networks.
 
