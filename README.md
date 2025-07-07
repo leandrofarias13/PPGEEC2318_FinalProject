@@ -92,7 +92,7 @@ with zipfile.ZipFile("cifar10_subset.zip", 'r') as zip_ref:
         zip_ref.extractall('')
 ```
 
-For further referencing, the paths for the training and test sets is recorded as follows:
+For further referencing, the paths for the training and test sets are:
 
 ```python
 path_train = 'cifar10_subset/train'
