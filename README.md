@@ -194,10 +194,7 @@ The base model used in this project, which was presented in the PPGEEC2318 class
    - **fc1**: The first fully connected layer consists of 50 units and receives the flattened feature vector from the convolutional layers. This layer is followed by the ReLU activation function. Dropout is applied here to prevent overfitting, with a probability `p` (if greater than 0).
    - **fc2**: The second fully connected layer has 3 output units, corresponding to the number of classes in the classification task. This layer provides the final classification result.
 
-4. **Dropout**:
-   - Dropout layers are added after the fully connected layers with the specified dropout probability `p`. This helps prevent overfitting by randomly setting some of the weights to zero during training.
-
-5. **Overall Structure**:
+4. **Overall Structure**:
    - The network takes an image as input, applies two convolutional blocks to extract hierarchical features, and then uses fully connected layers to classify the image into one of the predefined classes. The final output is a vector of size 3, representing the predicted class probabilities for a 3-class classification problem.
 
 ![Base Model Architecture](images/base_model.png)
