@@ -69,7 +69,7 @@ The **CIFAR-10** dataset is a well-known benchmark in computer vision, consistin
 - **Automobile**  
 - **Ship**  
 
-Each image is a small, low-resolution RGB photo, making this a good dataset for testing lightweight models and data augmentation strategies.
+Each image is a small, low-resolution RGB photo, making this a good dataset for testing lightweight models.
 
 The **target variable** is the class label of the image, encoded as:
 
