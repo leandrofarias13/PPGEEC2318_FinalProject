@@ -331,7 +331,7 @@ This work offers valuable insights into building and improving image classificat
 
 ## Ethical Considerations
 
-- Dataset is synthetic: No real user data involved.
+- No real user data involved.
 
 ---
 
