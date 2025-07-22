@@ -206,9 +206,7 @@ As done in class, `n_feature` is set to 5 and `p` is set o 0.3. 30 epochs were u
 
 ### Evaluation
 
-At the end of the training, an accuracy of 0.7877 was obtained, precision was 0.7916, and recall was 0.7877. The model shows good performance in terms of both precision and recall, with the values being relatively close, indicating that the model is effectively balancing the ability to correctly identify positive instances (recall) with the ability to avoid incorrectly labeling negatives as positives (precision). Accuracy is also decent, showing that the model correctly predicts the majority of instances.
-
-The following confusion matrix was obtained:
+At the end of the training, an accuracy of 0.7877 was obtained, showing that the model correctly predicts the majority of instances. The following confusion matrix was obtained:
 
 ![Base Model Confusion Matrix](images/base_model_confusion_matrix.png)
 
@@ -252,20 +250,20 @@ With the goal of improving the model performance, we developed 5 variations of t
 
 As presented for the base model, the confusion matrix, accuracy, precision, recall, filter and feature maps visualization were made for all the models. For the sake of organization, we decide to not present all these results in this README. However, they all can be seen and be reproduced with the `part1.ipynb` notebook. We summarized the results in the following table:
 
-| Model         | Trainable Parameters  | Accuracy  | Precision  | Recall    |
-|---------------|-----------------------|-----------|------------|-----------|
-| Base          | 6823                  | 0.7877    | 0.7916     | 0.7877    | 
-| 1             | 13893                 | 0.8553    | 0.8599     | 0.8553    | 
-| 2             | 21413                 | 0.8813    | 0.8814     | 0.8813    | 
-| 3             | 29383                 | 0.8843    | 0.8847     | 0.8843    | 
-| 4             | 8356                  | 0.6993    | 0.7192     | 0.6993    | 
-| 5             | 10676                 | 0.8000    | 0.8004     | 0.8000    | 
+| Model         | Trainable Parameters  | Accuracy  | 
+|---------------|-----------------------|-----------|
+| Base          | 6823                  | 0.7877    | 
+| 1             | 13893                 | 0.8553    |
+| 2             | 21413                 | 0.8813    |
+| 3             | 29383                 | 0.8843    |
+| 4             | 8356                  | 0.6993    | 
+| 5             | 10676                 | 0.8000    |
 
 For the first 3 models, for which the `n_feature` parameters varies, model 2 presents the best trade-off between trainable parameters and performance metrics, since model 3 presents a considerable increase in parameters for an improvement of only 0.0030 in accuracy. Between models 4 a 5, for which the architecture changes in relation to the base, model 5 presents a considerable increase in accuracy when adding two Convolution+Pooling blocks, instead of just one, which justifies the increase in trainable parameters.
 
-## Final Model
+## Our Proposition
 
-For the final model, we decided to combine models 2 and 5, that is, a model with `n_feature=15` and 2 additional Convolution+Pooling blocks. The training and evaluation of the final model is presented in the next subsections.
+One of the goals of this machine learning project, was to propose a model to solve this problem. Based on the analysis above, we decided to combine models 2 and 5, that is, a model with `n_feature=15` and 2 additional Convolution+Pooling blocks. The training and evaluation of the final model is presented in the next subsections.
 
 ### Training
 The training and validation curves are shown below:
@@ -274,7 +272,7 @@ The training and validation curves are shown below:
 
 ### Evaluation
 
-At the end of the training, an accuracy of 0.8950 was obtained, precision was 0.8948, and recall was 0.0.8950. Accuracy showed a significant improvement when compared to the performance of the base model.
+At the end of the training, an accuracy of 0.8950 was obtained. Accuracy showed a significant improvement when compared to the performance of the base model, but it had a similar performance to models 2 and 3 with a significant increase in the architecure complexity. Also, the training and validation curves showed a possible overfitting. Therefore, we still considered the model 2 to have the best trade-off between complexity and performance.
 
 The following confusion matrix was obtained:
 
@@ -303,6 +301,18 @@ These feature maps illustrate the transition of the convolutional network from l
 In contrast, the feature map that comes from a deeper layer in the network displays a much larger number of filters with denser, less sharp activations that are harder to interpret visually. This behavior is expected in deeper layers, where filters learn to combine features extracted earlier to form higher-level semantic representations, such as specific parts of objects or discriminative patterns important for classification tasks.
 
 In summary, while the early layers of the network act as general detectors of basic visual patterns, the deeper layers serve as specialists, extracting increasingly abstract and task-relevant information. This hierarchical learning process is one of the key strengths of deep convolutional networks.
+
+## Learning Rate Analysis
+
+After the testing of many different variations of the base model, we decided that model 2 (with the same architecture as the base model, but with `n_feature=15`) was the best trade-off between compututaional complexity and performance. Therefore, we did an analysis to find the best learning rate for this model, which is shown in the file `part2.ipynb`.
+
+We used the [`torch-lr-finder`](https://github.com/davidtvs/pytorch-lr-finder) library, which automates the LR test:
+
+- The model is trained for a few iterations with increasing learning rates
+- The library then plots the loss vs. learning rate, again in log scale
+- We used the `.range_test()` and `.plot()` methods to visualize this relationship
+
+This tool provides a clean and interpretable curve that suggests a good learning rate just before the loss increases abruptly.
 
 ## **Conclusions**
 
