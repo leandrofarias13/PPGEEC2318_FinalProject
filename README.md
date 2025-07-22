@@ -200,7 +200,9 @@ The base model used in this project, which was presented in the PPGEEC2318 class
 ![Base Model Architecture](images/base_model.png)
 
 ### Training
-As done in class, `n_feature` is set to 5 and `p` is set o 0.3. 30 epochs were used for the training, and the training and validation curves are shown below:
+As done in class, `n_feature` is set to 5 and `p` is set o 0.3. 30 epochs were used for the training, ans the learning rate was set to 0.0003 (this learning rate was used for all models tested in this repository, except for the one in the Learning Rate Analysis section). 
+
+The training and validation curves are shown below:
 
 ![Base Model Training and Validation Curves](images/base_model_training.png)
 
@@ -312,7 +314,19 @@ We used the [`torch-lr-finder`](https://github.com/davidtvs/pytorch-lr-finder) l
 - The library then plots the loss vs. learning rate, again in log scale
 - We used the `.range_test()` and `.plot()` methods to visualize this relationship
 
-This tool provides a clean and interpretable curve that suggests a good learning rate just before the loss increases abruptly.
+This tool provides a clean and interpretable curve that suggests a good learning rate just before the loss increases abruptly. The curve obtained for model 2 is as follows:
+
+![Learning Rate Curve](images/lr_curve.png)
+
+This curve suggest that the 0.0003 learning rate used for the model training was too low, and that the appropriate learning rate is equal to 0.00421. Using this learning rate to train the model, we obtain the following training and validation curves:
+
+![Model 2 with Modified Learning Rate Training and Validation Curves](images/lr_model_training.png)
+
+And the confusion matrix is shown below:
+
+![Model 2 with Modified Learning Rate Confusion Matrix](images/lr_model_confusion_matrix.png)
+
+After the training, the obtained accuracy with the validation set was of 0.8413, which is lower than the accuracy obtained with the original learning rate.
 
 ## **Conclusions**
 
