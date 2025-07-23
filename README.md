@@ -13,6 +13,8 @@ The goal is to train and evaluate different CNN models to perform the task descr
 
 The complete pipeline includes fetching data, preprocessing, data preparation, model training, model evaluation, and reporting. The complete pipeline is contained in the `part1.ipynb` file.
 
+After the choosing the model with the best performance for solving the problem, a learning rate analysis was done to choose the best learning rate for the problem. This analysis is contained in the `part2.ipynb` file.
+
 ---
 
 ## Environment Setup
@@ -326,25 +328,27 @@ And the confusion matrix is shown below:
 
 ![Model 2 with Modified Learning Rate Confusion Matrix](images/lr_model_confusion_matrix.png)
 
-After the training, the obtained accuracy with the validation set was of 0.8413, which is lower than the accuracy obtained with the original learning rate.
+After the training, the obtained accuracy with the validation set was of 0.8413, which is lower than the accuracy obtained with the original learning rate, although it still shows a good performance.
 
 ## **Conclusions**
 
 In this project, we successfully applied a convolutional neural network (CNN) to classify a subset of the **CIFAR-10** dataset into three categories: **airplane**, **automobile**, and **ship**. The process included data preprocessing, model development, and evaluation. 
 
-Through a series of model variations, we identified that the base CNN model performed well, achieving a solid balance between **precision** and **recall**. The **accuracy** of the base model was 0.7877, while the precision and recall were both around 0.7916 and 0.7877, respectively. However, after experimenting with various architectures, we achieved significant improvements. The **final model**, which combines the best aspects of both feature adjustments and architectural changes, yielded an accuracy of 0.8950, with corresponding precision and recall of 0.8948 and 0.8950. 
+Through a series of model variations, we identified that the base CNN model performed well, with an **accuracy** of 0.7877. However, after experimenting with various architectures, we achieved significant improvements. We proposed a model, which combines the best aspects of both feature adjustments and architectural changes, yielded an accuracy of 0.8950, although we concluded that the increase in computational complexity did not justify the small gain in accuracy when compared to the other tested models (model 2, for example). 
 
-These results highlight the importance of exploring different configurations and hyperparameters to achieve optimal model performance. Notably, the model that added two extra convolutional blocks showed substantial improvements in accuracy and robustness.
+These results highlight the importance of exploring different configurations and hyperparameters to achieve optimal model performance while at the same time considering the trade-off with computational complexity. 
 
-While the model performs well on this simplified subset of the **CIFAR-10 dataset**, there is always room for further optimization, such as exploring more advanced architectures, hyperparameter tuning, or testing on larger datasets. This project provides a solid foundation for understanding and applying CNNs in the context of image classification.
+Also, an analysis for the best learning rate was performed using [`torch-lr-finder`](https://github.com/davidtvs/pytorch-lr-finder) library. Although the learning rate obtained with the method didn't increase the performance, this analysis provided a good pipeline for finding a good starting learning rate for future projects. 
+
+While the model performs well on this simplified subset of the **CIFAR-10 dataset**, there is always room for further optimization, such as exploring more advanced architectures or testing on larger datasets. This project provides a solid foundation for understanding and applying CNNs in the context of image classification.
 
 ### **Key Takeaways**:
-- The **Base Model** offered a solid starting point, with good precision and recall values.
+- The **Base Model** offered a solid starting point.
 - Adjusting the **n_feature** parameter and adding **extra convolutional blocks** improved the model’s performance significantly.
-- The **final model** (with `n_feature = 15` and two extra convolution blocks) provided the best trade-off between performance and computational complexity.
+- The model that we proposed (with `n_feature = 15` and two extra convolution blocks) provided the best accuracy.
+- Model 2  (with `n_feature = 15` and the same architecture as the base model) presented the best trade-off between accuracy and computational complexity. 
 
 This work offers valuable insights into building and improving image classification models with PyTorch and can serve as a reference for further developments in machine learning applications.
-
 
 ## Intended Use
 
@@ -358,6 +362,9 @@ This work offers valuable insights into building and improving image classificat
 - No real user data involved.
 
 ---
+
+## References
+> Godoy, D. V. (2021). *Deep Learning with PyTorch Step-by-Step: A Beginner's Guide*. Leanpub.  
 
 ## How to Cite
 
