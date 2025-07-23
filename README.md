@@ -13,7 +13,7 @@ The goal is to train and evaluate different CNN models to perform the task descr
 
 The complete pipeline includes fetching data, preprocessing, data preparation, model training, model evaluation, and reporting. The complete pipeline is contained in the `part1.ipynb` file.
 
-After the choosing the model with the best performance for solving the problem, a learning rate analysis was done to choose the best learning rate for the problem. This analysis is contained in the `part2.ipynb` file.
+After the choosing the model with the best performance for solving the problem, a learning rate analysis was done to choose the best learning rate for the problem. This analysis is contained in the `part2_LearningRateAnalysis.ipynb` file.
 
 ---
 
